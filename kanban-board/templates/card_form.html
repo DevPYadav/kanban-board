@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h2>{{ action }} Card</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="title">Title *</label>
+            <input type="text" id="title" name="title" required value="{{ card.title if card else '' }}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4">{{ card.description if card else '' }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="column_id">Column *</label>
+            <select id="column_id" name="column_id" required>
+                {% for column in columns %}
+                <option value="{{ column.id }}" {% if card and card.column_id == column.id %}selected{% endif %}>
+                    {{ column.swimlane.name }} > {{ column.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="due_date">Due Date</label>
+            <input type="date" id="due_date" name="due_date" value="{{ card.due_date.strftime('%Y-%m-%d') if card and card.due_date else '' }}">
+        </div>
+        <div class="form-group">
+            <label for="priority">Priority</label>
+            <select id="priority" name="priority">
+                <option value="low" {% if card and card.priority == 'low' %}selected{% endif %}>Low</option>
+                <option value="medium" {% if not card or card.priority == 'medium' %}selected{% endif %}>Medium</option>
+                <option value="high" {% if card and card.priority == 'high' %}selected{% endif %}>High</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tags">Tags (comma-separated)</label>
+            <input type="text" id="tags" name="tags" value="{{ card.tags if card else '' }}" placeholder="e.g., frontend, bug, feature">
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">{{ action }} Card</button>
+            <a href="{{ url_for('index') }}" class="btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

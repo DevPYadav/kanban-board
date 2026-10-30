@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search cards..." onkeyup="filterCards()">
+</div>
+
+<div class="board">
+    {% for swimlane in swimlanes %}
+    <div class="swimlane" data-swimlane-id="{{ swimlane.id }}">
+        <div class="swimlane-header">
+            <h2>{{ swimlane.name }}</h2>
+            <div class="swimlane-actions">
+                <a href="{{ url_for('edit_swimlane', swimlane_id=swimlane.id) }}">Edit</a>
+                <form action="{{ url_for('delete_swimlane', swimlane_id=swimlane.id) }}" method="POST" onsubmit="return confirm('Delete this swimlane and all its columns and cards?');">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+        <div class="columns-container">
+            {% for column in swimlane.columns|sort(attribute='order') %}
+            <div class="column" data-column-id="{{ column.id }}">
+                <div class="column-header">
+                    <h3>{{ column.name }}</h3>
+                    <div class="column-actions">
+                        <a href="{{ url_for('edit_column', column_id=column.id) }}">Edit</a>
+                        <form action="{{ url_for('delete_column', column_id=column.id) }}" method="POST" onsubmit="return confirm('Delete this column and all its cards?');">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="cards-container">
+                    {% for card in column.cards|sort(attribute='order') %}
+                    <div class="card" data-card-id="{{ card.id }}" data-priority="{{ card.priority }}">
+                        <div class="card-header">
+                            <h4>{{ card.title }}</h4>
+                            <div class="card-actions">
+                                <a href="{{ url_for('edit_card', card_id=card.id) }}">Edit</a>
+                                <form action="{{ url_for('delete_card', card_id=card.id) }}" method="POST" onsubmit="return confirm('Delete this card?');">
+                                    <button type="submit">×</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% if card.description %}
+                        <p class="card-description">{{ card.description }}</p>
+                        {% endif %}
+                        <div class="card-meta">
+                            {% if card.due_date %}
+                            <span class="due-date">Due: {{ card.due_date.strftime('%Y-%m-%d') }}</span>
+                            {% endif %}
+                            <span class="priority priority-{{ card.priority }}">{{ card.priority|capitalize }}</span>
+                            {% if card.tags %}
+                            <div class="tags">
+                                {% for tag in card.tags.split(',') %}
+                                <span class="tag">{{ tag.strip() }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <form action="{{ url_for('move_card', card_id=card.id) }}" method="POST" class="move-form">
+                            <select name="column_id" onchange="this.form.submit()">
+                                {% for sl in swimlanes %}
+                                    {% for col in sl.columns|sort(attribute='order') %}
+                                    <option value="{{ col.id }}" {% if col.id == card.column_id %}selected{% endif %}>
+                                        {{ sl.name }} > {{ col.name }}
+                                    </option>
+                                    {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </div>
+                    {% endfor %}
+                    <a href="{{ url_for('create_card') }}?column_id={{ column.id }}" class="add-card-btn">+ Add Card</a>
+                </div>
+            </div>
+            {% endfor %}
+            <a href="{{ url_for('create_column') }}?swimlane_id={{ swimlane.id }}" class="add-column-btn">+ Add Column</a>
+        </div>
+    </div>
+    {% endfor %}
+    <a href="{{ url_for('create_swimlane') }}" class="add-swimlane-btn">+ Add Swimlane</a>
+</div>
+{% endblock %}
