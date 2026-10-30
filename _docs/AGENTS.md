@@ -13,5 +13,7 @@ Documentation
 - `_docs/process.md` - how work is organized
 - `_docs/task-template.md` - template for writing task descriptions
 - `_docs/team/pm.md` - PM guidelines for grooming tasks
+- `_docs/team/software-engineer.md` - Software engineer guidelines for implementation
+- `_docs/team/qa-engineer.md` - QA engineer guidelines for verification
 - For anything touching the UI, read `_docs/design-system.md`
 - For API details, read `_docs/api.md`
