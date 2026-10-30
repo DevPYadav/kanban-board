@@ -1,17 +1,15 @@
 Commands
 
-- `uv sync` - install dependencies
-- `uv run pytest` - the whole suite
-- `uv run pytest tests/test_home.py` - one test file
+- `pip install -r kanban-board/requirements.txt` - install dependencies
+- `cd kanban-board && python3 app.py` - run the application
 
 Rules
 
-- Dependencies are added in `pyproject.toml`. Do not add one without
+- Dependencies are added in `kanban-board/requirements.txt`. Do not add one without
   asking
 
 Documentation
 
 - `_docs/process.md` - how work is organized
-- Before writing tests, read `_docs/testing-guidelines.md`
 - For anything touching the UI, read `_docs/design-system.md`
 - For API details, read `_docs/api.md`

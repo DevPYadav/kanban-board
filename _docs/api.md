@@ -17,9 +17,6 @@ Display the main Kanban board with all swimlanes, columns, and cards.
 ### GET /card/create
 Display the card creation form.
 
-**Query Parameters:**
-- `column_id` (optional): Pre-select the column for the new card
-
 **Response:** HTML form for creating a card
 
 ### POST /card/create
@@ -35,37 +32,37 @@ Create a new card.
 
 **Response:** Redirect to index page with flash message
 
-### GET /card/<id>/edit
+### GET /card/<card_id>/edit
 Display the card edit form for a specific card.
 
 **Path Parameters:**
-- `id`: Card ID (integer)
+- `card_id`: Card ID (integer)
 
 **Response:** HTML form pre-populated with card data
 
-### POST /card/<id>/edit
+### POST /card/<card_id>/edit
 Update an existing card.
 
 **Path Parameters:**
-- `id`: Card ID (integer)
+- `card_id`: Card ID (integer)
 
 **Form Data:** Same as POST /card/create
 
 **Response:** Redirect to index page with flash message
 
-### POST /card/<id>/delete
+### POST /card/<card_id>/delete
 Delete a card.
 
 **Path Parameters:**
-- `id`: Card ID (integer)
+- `card_id`: Card ID (integer)
 
 **Response:** Redirect to index page with flash message
 
-### POST /card/<id>/move
+### POST /card/<card_id>/move
 Move a card to a different column.
 
 **Path Parameters:**
-- `id`: Card ID (integer)
+- `card_id`: Card ID (integer)
 
 **Form Data:**
 - `column_id` (required): ID of the destination column (integer)
@@ -90,29 +87,29 @@ Create a new swimlane.
 
 **Response:** Redirect to index page with flash message
 
-### GET /swimlane/<id>/edit
+### GET /swimlane/<swimlane_id>/edit
 Display the swimlane edit form.
 
 **Path Parameters:**
-- `id`: Swimlane ID (integer)
+- `swimlane_id`: Swimlane ID (integer)
 
 **Response:** HTML form pre-populated with swimlane data
 
-### POST /swimlane/<id>/edit
+### POST /swimlane/<swimlane_id>/edit
 Update an existing swimlane.
 
 **Path Parameters:**
-- `id`: Swimlane ID (integer)
+- `swimlane_id`: Swimlane ID (integer)
 
 **Form Data:** Same as POST /swimlane/create
 
 **Response:** Redirect to index page with flash message
 
-### POST /swimlane/<id>/delete
+### POST /swimlane/<swimlane_id>/delete
 Delete a swimlane and all its columns and cards.
 
 **Path Parameters:**
-- `id`: Swimlane ID (integer)
+- `swimlane_id`: Swimlane ID (integer)
 
 **Response:** Redirect to index page with flash message
 
@@ -122,9 +119,6 @@ Delete a swimlane and all its columns and cards.
 
 ### GET /column/create
 Display the column creation form.
-
-**Query Parameters:**
-- `swimlane_id` (optional): Pre-select the swimlane for the new column
 
 **Response:** HTML form for creating a column
 
@@ -138,29 +132,29 @@ Create a new column.
 
 **Response:** Redirect to index page with flash message
 
-### GET /column/<id>/edit
+### GET /column/<column_id>/edit
 Display the column edit form.
 
 **Path Parameters:**
-- `id`: Column ID (integer)
+- `column_id`: Column ID (integer)
 
 **Response:** HTML form pre-populated with column data
 
-### POST /column/<id>/edit
+### POST /column/<column_id>/edit
 Update an existing column.
 
 **Path Parameters:**
-- `id`: Column ID (integer)
+- `column_id`: Column ID (integer)
 
 **Form Data:** Same as POST /column/create
 
 **Response:** Redirect to index page with flash message
 
-### POST /column/<id>/delete
+### POST /column/<column_id>/delete
 Delete a column and all its cards.
 
 **Path Parameters:**
-- `id`: Column ID (integer)
+- `column_id`: Column ID (integer)
 
 **Response:** Redirect to index page with flash message
 
@@ -202,7 +196,6 @@ Delete a column and all its cards.
 - `200 OK`: Successful GET request
 - `302 Found`: Redirect after POST request
 - `404 Not Found`: Resource not found (invalid ID)
-- `400 Bad Request`: Invalid form data (validation error)
 
 ---
 
@@ -210,7 +203,7 @@ Delete a column and all its cards.
 
 All POST operations that modify data return flash messages:
 
-- **Success:** "Card created successfully", "Card updated successfully", "Card deleted successfully", "Card moved successfully", "Swimlane created successfully", "Swimlane updated successfully", "Swimlane deleted successfully", "Column created successfully", "Column updated successfully", "Column deleted successfully"
+- **Success:** "Card created successfully!", "Card updated successfully!", "Card deleted successfully!", "Card moved successfully!", "Swimlane created successfully!", "Swimlane updated successfully!", "Swimlane deleted successfully!", "Column created successfully!", "Column updated successfully!", "Column deleted successfully!"
 
 Flash messages are displayed at the top of the page and auto-hide after 5 seconds.
 
