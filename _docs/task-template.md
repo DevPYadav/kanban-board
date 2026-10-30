@@ -1,18 +1,18 @@
-# Task Template
+## Goal
 
-## Summary
-One-line summary of what this task accomplishes.
+One or two sentences on what should be true when this is done.
 
-## Background
-Context about why this task is needed. What problem does it solve? What user need does it address?
+## Acceptance criteria
 
-## Acceptance Criteria
-- [ ] Criterion 1: Something that can be verified by looking at the result
-- [ ] Criterion 2: Another verifiable outcome
-- [ ] Criterion 3: More verifiable outcomes
+- [ ] A statement you can check by looking at the result
+- [ ] One line per case, including the awkward ones
 
-## Out of Scope
-List things that are related but not part of this task. If these should be done later, file follow-up issues and link them here.
+## Out of scope
 
-- Item 1 that is out of scope (see issue #X)
-- Item 2 that is out of scope (see issue #Y)
+- Something that does not belong in this task, moved to #TASK-NUMBER
+
+## Constraints
+
+- Files this should stay inside
+- Libraries to use
+- Guidelines to follow
