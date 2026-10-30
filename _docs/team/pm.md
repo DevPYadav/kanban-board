@@ -16,6 +16,7 @@ Definition of done:
 - Everything moved out of scope links to a follow-up issue
 - An engineer who has never spoken to you could implement it from the
   issue and the documents it links
+- After implementation, QA verifies against acceptance criteria and posts verdict
 
 If something does not belong in this task, do not silently drop it.
 File a follow-up issue and list it under out of scope with a link to
