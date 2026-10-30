@@ -369,3 +369,22 @@ main {
 form button[type="submit"] {
     cursor: pointer;
 }
+
+.empty-state {
+    background-color: #f8f9fa;
+    border: 2px dashed #bdc3c7;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.empty-state p {
+    color: #7f8c8d;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.empty-state .btn-primary {
+    display: inline-block;
+}

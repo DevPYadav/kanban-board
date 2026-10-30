@@ -6,6 +6,12 @@
 </div>
 
 <div class="board">
+    {% if not swimlanes %}
+    <div class="empty-state empty-swimlanes">
+        <p>No swimlanes. Create one to get started.</p>
+        <a href="{{ url_for('create_swimlane') }}" class="btn-primary">+ Add Swimlane</a>
+    </div>
+    {% else %}
     {% for swimlane in swimlanes %}
     <div class="swimlane" data-swimlane-id="{{ swimlane.id }}">
         <div class="swimlane-header">
@@ -18,6 +24,12 @@
             </div>
         </div>
         <div class="columns-container">
+            {% if not swimlane.columns %}
+            <div class="empty-state empty-columns">
+                <p>No columns. Add a column to this swimlane.</p>
+                <a href="{{ url_for('create_column') }}?swimlane_id={{ swimlane.id }}" class="btn-primary">+ Add Column</a>
+            </div>
+            {% else %}
             {% for column in swimlane.columns|sort(attribute='order') %}
             <div class="column" data-column-id="{{ column.id }}">
                 <div class="column-header">
@@ -30,6 +42,12 @@
                     </div>
                 </div>
                 <div class="cards-container">
+                    {% if not column.cards %}
+                    <div class="empty-state empty-cards">
+                        <p>No cards. Add a card to this column.</p>
+                        <a href="{{ url_for('create_card') }}?column_id={{ column.id }}" class="btn-primary">+ Add Card</a>
+                    </div>
+                    {% else %}
                     {% for card in column.cards|sort(attribute='order') %}
                     <div class="card" data-card-id="{{ card.id }}" data-priority="{{ card.priority }}">
                         <div class="card-header">
@@ -71,13 +89,16 @@
                     </div>
                     {% endfor %}
                     <a href="{{ url_for('create_card') }}?column_id={{ column.id }}" class="add-card-btn">+ Add Card</a>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
+            {% endif %}
             <a href="{{ url_for('create_column') }}?swimlane_id={{ swimlane.id }}" class="add-column-btn">+ Add Column</a>
         </div>
     </div>
     {% endfor %}
+    {% endif %}
     <a href="{{ url_for('create_swimlane') }}" class="add-swimlane-btn">+ Add Swimlane</a>
 </div>
 {% endblock %}
