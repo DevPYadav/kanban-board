@@ -5,6 +5,11 @@
     <input type="text" id="searchInput" placeholder="Search cards..." onkeyup="filterCards()">
 </div>
 
+<div id="emptySearchMessage" class="empty-state empty-search" style="display: none;">
+    <p>No cards match your search.</p>
+    <button onclick="clearSearch()" class="btn-primary">Clear Search</button>
+</div>
+
 <div class="board">
     {% if not swimlanes %}
     <div class="empty-state empty-swimlanes">
