@@ -6,13 +6,13 @@
     <form method="POST">
         <div class="form-group">
             <label for="name">Name *</label>
-            <input type="text" id="name" name="name" required value="{{ column.name if column else '' }}">
+            <input type="text" id="name" name="name" required value="{{ form_data.name if form_data else (column.name if column else '') }}">
         </div>
         <div class="form-group">
             <label for="swimlane_id">Swimlane *</label>
             <select id="swimlane_id" name="swimlane_id" required>
                 {% for swimlane in swimlanes %}
-                <option value="{{ swimlane.id }}" {% if column and column.swimlane_id == swimlane.id %}selected{% endif %}>
+                <option value="{{ swimlane.id }}" {% if (form_data and form_data.swimlane_id == swimlane.id|string) or (column and column.swimlane_id == swimlane.id) %}selected{% endif %}>
                     {{ swimlane.name }}
                 </option>
                 {% endfor %}
@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
             <label for="order">Order</label>
-            <input type="number" id="order" name="order" value="{{ column.order if column else 0 }}">
+            <input type="number" id="order" name="order" value="{{ form_data.order if form_data else (column.order if column else 0) }}">
         </div>
         <div class="form-actions">
             <button type="submit" class="btn-primary">{{ action }} Column</button>
